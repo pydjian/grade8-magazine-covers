@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grade 8 Magazine Covers</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Layout: a print-shop proof wall. CMYK bar and registration mark up top, a grid of cover-shaped frames below, one lightbox for close viewing. */
+:root {
+  --bg: #ECEEF0; --surface: #FFFFFF; --surface-2: #DDE1E5; --ink: #15171B; --muted: #565C65; --line: #C8CDD3;
+  --accent: #D6006F; --on-accent: #FFFFFF; --cyan: #00A6D6; --yellow: #FFD200; --key: #15171B;
+  --shadow: 0 1px 2px rgba(20,24,30,.14), 0 8px 20px rgba(20,24,30,.10);
+  --font-display: "Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "DM Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "DM Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #121316; --surface: #1B1D21; --surface-2: #26292E; --ink: #ECEDEF; --muted: #9BA1A9; --line: #30343A;
+    --accent: #FF4DA6; --on-accent: #15171B; --cyan: #2BC4F0; --yellow: #FFD84A; --key: #ECEDEF;
+    --shadow: 0 1px 2px rgba(0,0,0,.5), 0 8px 20px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.cmyk { display: flex; height: 8px; }
+.cmyk i { flex: 1; display: block; }
+.cmyk i:nth-child(1) { background: var(--cyan); }
+.cmyk i:nth-child(2) { background: var(--accent); }
+.cmyk i:nth-child(3) { background: var(--yellow); }
+.cmyk i:nth-child(4) { background: var(--key); }
+.wrap { max-width: 1180px; margin: 0 auto; padding: 28px 16px 56px; }
+header { display: grid; gap: 20px; padding-bottom: 24px; border-bottom: 1px solid var(--line); }
+.kicker { display: flex; align-items: center; gap: 10px; font: 500 12px/1 var(--font-mono); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.kicker svg { width: 18px; height: 18px; color: var(--ink); flex: none; }
+h1 { font: 800 clamp(2.4rem, 8vw, 4.6rem)/.95 var(--font-display); letter-spacing: -.03em; margin: 0; text-wrap: balance; }
+.sub { margin: 0; max-width: 60ch; color: var(--muted); font-size: 1.05rem; }
+.looklist { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0; padding: 0; list-style: none; }
+.looklist .lbl { font: 500 12px/1 var(--font-mono); letter-spacing: .1em; text-transform: uppercase; color: var(--muted); margin-right: 4px; }
+.looklist li:not(.lbl) { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; font-size: 13px; }
+.tools { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; padding-block: 20px; }
+.count { font: 500 13px/1 var(--font-mono); letter-spacing: .06em; color: var(--muted); text-transform: uppercase; }
+input[type="search"] { font: inherit; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 9px 12px; min-width: 0; width: min(100%, 280px); }
+input:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+button { font: 700 14px/1 var(--font-body); border-radius: 8px; padding: 11px 16px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 28px 20px; }
+.card { all: unset; box-sizing: border-box; display: grid; gap: 10px; cursor: pointer; align-content: start; min-width: 0; }
+.cover { position: relative; aspect-ratio: 17 / 22; max-width: 100%; background: var(--surface-2); border-radius: 3px; box-shadow: var(--shadow); overflow: hidden; transition: transform .18s ease; }
+.cover img { width: 100%; height: 100%; object-fit: contain; display: block; }
+.card:hover .cover { transform: translateY(-4px); }
+.card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.missing { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 12px; font: 500 12px/1.3 var(--font-mono); color: var(--muted); }
+.who { font: 700 15px/1.25 var(--font-display); overflow-wrap: anywhere; }
+.mag { font: 400 12px/1.3 var(--font-mono); color: var(--muted); overflow-wrap: anywhere; }
+.empty { display: grid; gap: 28px; justify-items: start; }
+.ghosts { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 20px; width: 100%; }
+.ghost { aspect-ratio: 17 / 22; border: 1px dashed var(--muted); border-radius: 3px; display: grid; place-items: center; color: var(--muted); font: 500 12px/1.3 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; position: relative; }
+.ghost::before, .ghost::after { content: ""; position: absolute; width: 10px; height: 10px; border: solid var(--ink); }
+.ghost::before { top: -6px; left: -6px; border-width: 0 1px 1px 0; }
+.ghost::after { right: -6px; bottom: -6px; border-width: 1px 0 0 1px; }
+.empty h2 { margin: 0; font: 800 1.6rem/1.1 var(--font-display); letter-spacing: -.02em; }
+.empty p { margin: 6px 0 0; color: var(--muted); max-width: 56ch; }
+.lightbox { position: fixed; inset: 0; z-index: 50; background: rgba(8,10,14,.82); display: grid; place-items: center; padding: 16px; overflow-y: auto; }
+.panel { background: var(--surface); color: var(--ink); border-radius: 12px; width: min(100%, 880px); max-height: 100%; overflow-y: auto; display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); }
+.panel .big { background: var(--surface-2); display: grid; place-items: center; padding: 20px; }
+.panel .big img { max-width: 100%; max-height: 78vh; width: auto; height: auto; display: block; box-shadow: var(--shadow); }
+.panel .info { padding: 24px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.info h3 { margin: 0; font: 800 1.7rem/1.05 var(--font-display); letter-spacing: -.02em; overflow-wrap: anywhere; }
+.info .mag { font-size: 14px; }
+.nav { display: flex; gap: 8px; margin-top: auto; flex-wrap: wrap; }
+@media (max-width: 680px) { .panel { grid-template-columns: minmax(0, 1fr); } .panel .big img { max-height: 58vh; } }
+@media (prefers-reduced-motion: reduce) { .cover { transition: none; } }
+[hidden] { display: none !important; }
+</style>
+</head>
+<body>
+<div class="cmyk" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<div class="wrap">
+  <header>
+    <div class="kicker">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="12" cy="12" r="6"/><path d="M12 1v22M1 12h22"/></svg>
+      <span>TLE · ICT · Grade 8 · Graphic Design</span>
+    </div>
+    <h1>Grade 8 Magazine Covers</h1>
+    <p class="sub">Student work from our Graphic Design unit. Every cover was designed from scratch in the Canva app. Tap a cover to see it larger.</p>
+    <ul class="looklist" aria-label="Design principles to look for">
+      <li class="lbl">While you look</li>
+      <li>Hierarchy</li><li>Contrast</li><li>Alignment</li><li>Balance</li><li>Typeface pairing</li><li>Color harmony</li>
+    </ul>
+  </header>
+
+  <div class="tools">
+    <div class="count" id="count"></div>
+    <input type="search" id="search" placeholder="Search by name or title" aria-label="Search covers" autocomplete="off">
+  </div>
+
+  <main>
+    <div class="grid" id="grid" hidden></div>
+    <div class="empty" id="empty" hidden>
+      <div>
+        <h2 id="emptyTitle">Covers are coming soon</h2>
+        <p id="emptyText">The covers have not been added yet. Check back later.</p>
+      </div>
+      <div class="ghosts" aria-hidden="true">
+        <div class="ghost">Cover 1</div><div class="ghost">Cover 2</div><div class="ghost">Cover 3</div><div class="ghost">Cover 4</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Cover viewer" hidden>
+  <div class="panel">
+    <div class="big"><img id="lbImg" alt=""></div>
+    <div class="info">
+      <div>
+        <h3 id="lbWho"></h3>
+        <div class="mag" id="lbMag"></div>
+      </div>
+      <div class="nav">
+        <button type="button" id="prev">Previous</button>
+        <button type="button" id="next">Next</button>
+        <button type="button" id="close">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===================================================================
+   EDIT THIS LIST to add covers.
+   1. Put each exported image in the "covers" folder (PNG, JPG or WebP).
+   2. Add one line per cover below. "file" must match the file name exactly.
+   =================================================================== */
+var COVERS = [
+  // { file: "juan-d.png", student: "Juan D.", title: "Tech Today" },
+  // { file: "maria-s.jpg", student: "Maria S.", title: "Game On" },
+];
+/* =================================================================== */
+
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var shown = [], openIndex = -1;
+
+  function srcOf(c) { return "covers/" + encodeURIComponent(c.file); }
+  function altOf(c) { return "Magazine cover" + (c.title ? " " + c.title : "") + (c.student ? " by " + c.student : ""); }
+
+  function render() {
+    var q = $("search").value.trim().toLowerCase();
+    shown = COVERS.filter(function (c) {
+      return !q || ((c.student || "") + " " + (c.title || "")).toLowerCase().indexOf(q) !== -1;
+    });
+    var total = COVERS.length;
+    $("count").textContent = total === 0 ? "No covers yet" :
+      (q ? shown.length + " of " + total : total) + (total === 1 ? " cover" : " covers");
+    $("search").hidden = total === 0;
+
+    var grid = $("grid"), empty = $("empty");
+    grid.textContent = "";
+    if (shown.length === 0) {
+      grid.hidden = true; empty.hidden = false;
+      if (total > 0) {
+        $("emptyTitle").textContent = "No covers match that search";
+        $("emptyText").textContent = "Try a first name or part of a magazine title.";
+      }
+      return;
+    }
+    empty.hidden = true; grid.hidden = false;
+    shown.forEach(function (c, i) {
+      var card = document.createElement("button");
+      card.type = "button"; card.className = "card"; card.setAttribute("data-i", i);
+      var cover = document.createElement("div"); cover.className = "cover";
+      var img = document.createElement("img");
+      img.loading = "lazy"; img.alt = altOf(c); img.src = srcOf(c);
+      img.onerror = function () {
+        img.remove();
+        var m = document.createElement("div"); m.className = "missing"; m.textContent = "Image not found: " + c.file;
+        cover.appendChild(m);
+      };
+      cover.appendChild(img);
+      var who = document.createElement("div"); who.className = "who"; who.textContent = c.student || "Unnamed";
+      var mag = document.createElement("div"); mag.className = "mag"; mag.textContent = c.title || "Untitled magazine";
+      card.appendChild(cover); card.appendChild(who); card.appendChild(mag);
+      grid.appendChild(card);
+    });
+  }
+
+  function fillBox() {
+    var c = shown[openIndex]; if (!c) return;
+    $("lbImg").src = srcOf(c); $("lbImg").alt = altOf(c);
+    $("lbWho").textContent = c.student || "Unnamed";
+    $("lbMag").textContent = c.title || "Untitled magazine";
+    var many = shown.length > 1; $("prev").hidden = !many; $("next").hidden = !many;
+  }
+  function openBox(i) { openIndex = i; $("lightbox").hidden = false; fillBox(); $("close").focus(); }
+  function closeBox() {
+    var i = openIndex; openIndex = -1; $("lightbox").hidden = true;
+    var card = document.querySelector('.card[data-i="' + i + '"]'); if (card) card.focus();
+  }
+  function step(d) { if (shown.length) { openIndex = (openIndex + d + shown.length) % shown.length; fillBox(); } }
+
+  $("grid").addEventListener("click", function (e) {
+    var card = e.target.closest(".card"); if (card) openBox(Number(card.getAttribute("data-i")));
+  });
+  $("close").addEventListener("click", closeBox);
+  $("prev").addEventListener("click", function () { step(-1); });
+  $("next").addEventListener("click", function () { step(1); });
+  $("lightbox").addEventListener("click", function (e) { if (e.target === $("lightbox")) closeBox(); });
+  document.addEventListener("keydown", function (e) {
+    if ($("lightbox").hidden) return;
+    if (e.key === "Escape") closeBox();
+    else if (e.key === "ArrowLeft") step(-1);
+    else if (e.key === "ArrowRight") step(1);
+  });
+  $("search").addEventListener("input", render);
+  render();
+})();
+</script>
+</body>
+</html>
